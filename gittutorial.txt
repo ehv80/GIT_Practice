@@ -1,0 +1,596 @@
+# Sábado 12/12/2020 
+# Registro de comandos
+# Fuente: #> man gittutorial
+
+$ git config --global user.name "ehv80"
+$ git config --global user.email ezequiel.villanueva@gmail.com
+
+$ tar zxvf proyecto-chat.tar.gz 
+$ cd proyecto-chat/
+$ git init
+
+$ git add .
+$ git commit
+
+$ git add progit.pdf
+$ git diff --cached
+$ git diff
+$ git status
+
+$ git commit
+$ git commit -a
+
+$ git log
+$ git log -p
+
+$ git log --stat --summary
+$ git branch experimental
+
+$ git branch
+
+$ git commit -a
+
+$ git checkout experimental
+$ git commit -a
+$ git checkout master
+
+(edit file)
+$ git commit -a
+
+$ git merge experimental
+
+$ git diff
+"
+diff --git a/Leame.txt b/Leame.txt
+index 7212a0a..ecc164d 100644
+--- a/Leame.txt
++++ b/Leame.txt
+@@ -9,3 +9,4 @@ codigos fuentes quedando entonces:
+        - servidor-tcp-con-select-setsockopt.c
+ ---
+ Línea añadida para hacer modificación por prácticas del tutorial de git
++Otra línea añadida por la práctica del tutorial de git en rama maestra
+"
+
+Para resolver el conflicto 
+
+me fijo en que rama estoy con 
+$git branch
+
+Estoy en rama "master"
+
+edito con vi el archivo Leame.txt para eliminar la última línea añadida a la rama "master"
+
+vuelvo a ejecutar $git diff para ver si hay conflictos en archivos de las ramas
+
+$ git diff
+
+No hay conflictos, no se muestra nada.
+
+Se confirman los cambios solo de los nuevos archivos modificados.
+
+$ git commit -a
+"
+En la rama master
+nada para hacer commit, el árbol de trabajo está limpio
+"
+
+Se muestra una representación gráfica linda de la historia de los cambios resultante con
+$ gitk
+
+Se intenta eliminar la rama "experimental" con 
+$ git branch -d experimental
+Muestra:
+"
+error: La rama 'experimental' no ha sido fusionada completamente.
+Si estás seguro de querer borrarla, ejecuta 'git branch -D experimental'.
+"
+
+En la Sección de "USING GIT FOR COLLABORATION"
+No se pueden ejecutar todos los comandos.
+Estos se han ejecutado
+
+$ git config --get remote.origin.url
+No muestra nada
+
+$ git config -l
+user.name=ehv80
+user.email=ezequiel.villanueva@gmail.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+
+$ git branch -r
+No muestra nada
+
+En la Sección "EXPLORING HISTORY"
+
+$ git log
+
+commit fd05a0c65dc27282058951cba8940654b212e38b (HEAD -> master)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:30:26 2020 -0300
+
+    Tercer commit luego de la modificación del archivo Leame.txt
+
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+commit 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 19:53:53 2020 -0300
+
+    "Proyecto chat"
+    para Examen Final de Taller de Programación 2
+    Thanks and by Guido Macchi @ AUS IPS UNR SANTA FE ARGENTINA
+
+
+Se Puede ver detalles de la primer confirmación con
+$ git show 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2
+
+La Salida muetra
+"
+commit 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 19:53:53 2020 -0300
+
+    "Proyecto chat"
+    para Examen Final de Taller de Programación 2
+    Thanks and by Guido Macchi @ AUS IPS UNR SANTA FE ARGENTINA
+
+diff --git a/Leame.txt b/Leame.txt
+new file mode 100644
+index 0000000..b958e8a
+--- /dev/null
++++ b/Leame.txt
+@@ -0,0 +1,9 @@
++Se intento hacer funcionar un PAR CLIENTE - SERVIDOR TCP CON SELECT,
++FCNTL Y SETSOCKOPT
++PERO el uso de fcntl(2) causaba un comportamiento raro al aplicarla
++sobre los conectores TCP, por lo que se eliminaron de los respectivos
++codigos fuentes quedando entonces:
++
++       - cliente-tcp-con-select-setsockopt.c
++       
++       - servidor-tcp-con-select-setsockopt.c
+diff --git a/cliente-tcp-con-select-setsockopt.c b/cliente-tcp-con-select-setsockopt.c
+new file mode 100644
+index 0000000..d2afdcf
+--- /dev/null
++++ b/cliente-tcp-con-select-setsockopt.c
+@@ -0,0 +1,166 @@
++/* Archivo: cliente-tcp-con-select-setsockopt.c 
++ * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock'.
++ *
++ * Mediante setsockopt(2) aplica a la opci<F3>n de nivel
++ * 'SOL_SOCKET' llamada 'SO_REUSEADDR' el valor de
++ * la constante 'yes' para el conector TCP 'sock'.
++ * 
++ * Inicia una conexi<F3>n TCP hacia un servidor
++ * TCP remoto. Una vez conectado, verifica 
++ * si existen paquetes de entrada 
++ * por el socket <F3> por STDIN.
++ *
++ * Si se reciben paquetes por el socket, 
++ * los env<ED>a a STDOUT (read(2)).
++ * 
++ * Si se reciben paquetes por STDIN, 
++ * los env<ED>a por el socket (write(2)).
+.
+.
+"
+(Y muchas líneas más)
+
+Lo mismo se puede hacer pero detallando solo unos pocos caracteres
+ de los 40 de la firma criptográfica SHA-1
+$ git show 3cacd0e5
+
+Se Muestra la punta de la rama actual:
+$ git show HEAD
+La Salida Muestra
+"
+commit fd05a0c65dc27282058951cba8940654b212e38b (HEAD -> master)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:30:26 2020 -0300
+
+    Tercer commit luego de la modificación del archivo Leame.txt
+
+diff --git a/Leame.txt b/Leame.txt
+index b958e8a..7212a0a 100644
+--- a/Leame.txt
++++ b/Leame.txt
+@@ -7,3 +7,5 @@ codigos fuentes quedando entonces:
+        - cliente-tcp-con-select-setsockopt.c
+        
+        - servidor-tcp-con-select-setsockopt.c
++---
++Línea añadida para hacer modificación por prácticas del tutorial de git
+"
+
+Se muestra la punta de la rama experimental:
+$ git show experimental
+La Salida Muestra:
+"
+commit 7ec88b23da29b0b69645bb03aa5c6c02a20d55d3 (experimental)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:42:40 2020 -0300
+
+    En rama experimental tercer commit por modificación del archivo Leame.txt
+
+diff --git a/Leame.txt b/Leame.txt
+index b958e8a..c4d5953 100644
+--- a/Leame.txt
++++ b/Leame.txt
+@@ -7,3 +7,6 @@ codigos fuentes quedando entonces:
+        - cliente-tcp-con-select-setsockopt.c
+        
+        - servidor-tcp-con-select-setsockopt.c
++
++---
++Nueva línea añadida para hacer las prácticas del tutorial de git
+"
+
+Se Puede ver la confirmación "padre" de la punta de la rama actual:
+$git show HEAD^
+La Salida Muestra:
+"
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+diff --git a/progit.pdf b/progit.pdf
+new file mode 100644
+index 0000000..b37512c
+Binary files /dev/null and b/progit.pdf differ
+"
+
+Se Puede ver la confirmación "abuelo" de la punta de la rama actual:
+$ git show HEAD^^
+La salida es muy extensa para mostrarla ;-)
+
+Se Puede ver la confirmación del "padre" del "padre" del "abuelo" de la punta de la rama actual:
+$ git show HEAD~4
+La salida muestra error porque solo hay 3 confirmaciones hechas en la rama actual "master"
+"
+fatal: argumento ambiguo 'HEAD~4': revisión desconocida o ruta fuera del árbol de trabajo.
+Use '--' para separar las rutas de las revisiones, de esta manera:
+'git <comando> [<revisión>...] -- [<archivo>...]'
+"
+
+Se puede ver que las confirmaciones de las fusiones (merge) pueden tener más de un padre:
+Se muestra el primer "padre" de la punta de la rama actual (HEAD) (es lo mismo que HEAD^)
+$ git show HEAD^1
+La salida muestra:
+"
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+diff --git a/progit.pdf b/progit.pdf
+new file mode 100644
+index 0000000..b37512c
+Binary files /dev/null and b/progit.pdf differ
+"
+
+Se muestra el Segundo "padre" de la punta de la rama actual (HEAD)
+$ git show HEAD^2
+La salida muestra:
+"
+fatal: argumento ambiguo 'HEAD^2': revisión desconocida o ruta fuera del árbol de trabajo.
+Use '--' para separar las rutas de las revisiones, de esta manera:
+'git <comando> [<revisión>...] -- [<archivo>...]'
+"
+
+Se puede etiquetar (tags) dar sus propios nombres a las confirmaciones (commits) 
+hechas en la rama actual "master" 
+Por ejemplo 
+
+Para la primer confirmación ponerle etiqueta v1.0
+$ git tag v1.0 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2
+
+Para la segunda confirmación ponerle etiqueta v2.0
+$ git tag v2.0 a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f
+
+Para la tercer confirmación ponerle etiqueta v3.0
+$ git tag v3.0 fd05a0c65dc27282058951cba8940654b212e38b
+
+Se pueden ver las etiquetas (tags) puestas a las confirmaciones (commits) de la rama actual "master"
+con 
+$ git log
+
+La salida muestra:
+"
+commit fd05a0c65dc27282058951cba8940654b212e38b (HEAD -> master, tag: v3.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:30:26 2020 -0300
+
+    Tercer commit luego de la modificación del archivo Leame.txt
+
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f (tag: v2.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+commit 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2 (tag: v1.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 19:53:53 2020 -0300
+
+    "Proyecto chat"
+    para Examen Final de Taller de Programación 2
+    Thanks and by Guido Macchi @ AUS IPS UNR SANTA FE ARGENTINA
+
+"
+
+Se puede ver la diferencia entre la segunda y la tercer confirmación de la rama actual "master"
+con
+$ git diff v2.0 HEAD
+"
+diff --git a/Leame.txt b/Leame.txt
+index b958e8a..7212a0a 100644
+--- a/Leame.txt
++++ b/Leame.txt
+@@ -7,3 +7,5 @@ codigos fuentes quedando entonces:
+        - cliente-tcp-con-select-setsockopt.c
+        
+        - servidor-tcp-con-select-setsockopt.c
++---
++Línea añadida para hacer modificación por prácticas del tutorial de git
+" 
+
+Se puede resetear tu rama actual y directorio de trabajo a su estado que apunta HEAD (punta de la rama actual "master")
+Con 
+$ git reset --hard HEAD
+La salida muestra
+"
+HEAD está ahora en fd05a0c Tercer commit luego de la modificación del archivo Leame.txt
+"
+Hay que ser cuidadoso con este comando porque además de perder cualquier cambio en el directorio de trabajo actual
+este removerá todas las confirmaciones de esta rama. Si esta es la única rama conteniendo estas confirmaciones
+se perderá.
+
+Se puede ver los cambios con
+$ git log
+La salida muestra:
+"
+commit fd05a0c65dc27282058951cba8940654b212e38b (HEAD -> master, tag: v3.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:30:26 2020 -0300
+
+    Tercer commit luego de la modificación del archivo Leame.txt
+
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f (tag: v2.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+commit 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2 (tag: v1.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 19:53:53 2020 -0300
+
+    "Proyecto chat"
+    para Examen Final de Taller de Programación 2
+    Thanks and by Guido Macchi @ AUS IPS UNR SANTA FE ARGENTINA
+"
+
+Ahora lo hacemos como esta en el manual:
+que sería resetear al estado que corresponde al "padre" del HEAD (punta de la rama "master"
+es decir resetear a la segunda confirmación de la rama "master"
+$ git reset --hard HEAD^
+La salida muestra
+"
+HEAD está ahora en a5fab59 Proyecto Chat Segundo Commit
+"
+y lo podemos ver con
+$ git log
+La Salida Muestra:
+"
+commit a5fab59d8bf3a9129d0e37cb34c5ed24aec7af0f (HEAD -> master, tag: v2.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 20:33:04 2020 -0300
+
+    Proyecto Chat
+    Segundo Commit
+
+commit 3cacd0e524ca0e335132bb6bdb0f11004a4f26d2 (tag: v1.0)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 19:53:53 2020 -0300
+
+    "Proyecto chat"
+    para Examen Final de Taller de Programación 2
+    Thanks and by Guido Macchi @ AUS IPS UNR SANTA FE ARGENTINA
+"
+
+Se puede buscar una cadena de texto en alguna versión-rama con git grep
+$ git grep "socket" v2.0
+La salida Muestra:
+"
+v2.0:cliente-tcp-con-select-setsockopt.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock'.
+v2.0:cliente-tcp-con-select-setsockopt.c: * por el socket <F3> por STDIN.
+v2.0:cliente-tcp-con-select-setsockopt.c: * Si se reciben paquetes por el socket, 
+v2.0:cliente-tcp-con-select-setsockopt.c: * los env<ED>a por el socket (write(2)).
+v2.0:cliente-tcp-con-select-setsockopt.c:#include<sys/socket.h>
+v2.0:cliente-tcp-con-select-setsockopt.c:       if((sock = socket(PF_INET, SOCK_STREAM,0))<0)
+v2.0:cliente-tcp-con-select-setsockopt.c:               error("socket");
+Binary file v2.0:cliente-tcp-con-select-setsockopt.out matches
+v2.0:servidor-tcp-con-select-setsockopt.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock'
+v2.0:servidor-tcp-con-select-setsockopt.c: * por el socket <F3> por STDIN.
+v2.0:servidor-tcp-con-select-setsockopt.c: * Si se reciben paquetes por el socket, 
+v2.0:servidor-tcp-con-select-setsockopt.c: * los env<ED>a por el socket (write(2)).
+v2.0:servidor-tcp-con-select-setsockopt.c:#include<sys/socket.h>
+v2.0:servidor-tcp-con-select-setsockopt.c:      if((sock = socket(PF_INET, SOCK_STREAM,0))<0)
+v2.0:servidor-tcp-con-select-setsockopt.c:              error("socket");
+v2.0:servidor-tcp-select-setsockopt-para-2-clientes.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock_oyente'
+v2.0:servidor-tcp-select-setsockopt-para-2-clientes.c:#include<sys/socket.h>
+v2.0:servidor-tcp-select-setsockopt-para-2-clientes.c:  if((sock_oyente = socket(PF_INET, SOCK_STREAM,0) ) < 0)
+v2.0:servidor-tcp-select-setsockopt-para-2-clientes.c:          error("socket_oyente");
+Binary file v2.0:servidor-tcp-select-setsockopt-para-2-clientes.out matches
+"
+Y si lo ejecuta sin especificar la versión-rama 
+$ git grep "socket"
+La Salida Muestra:
+"
+cliente-tcp-con-select-setsockopt.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock'.
+cliente-tcp-con-select-setsockopt.c: * por el socket <F3> por STDIN.
+cliente-tcp-con-select-setsockopt.c: * Si se reciben paquetes por el socket, 
+cliente-tcp-con-select-setsockopt.c: * los env<ED>a por el socket (write(2)).
+cliente-tcp-con-select-setsockopt.c:#include<sys/socket.h>
+cliente-tcp-con-select-setsockopt.c:    if((sock = socket(PF_INET, SOCK_STREAM,0))<0)
+cliente-tcp-con-select-setsockopt.c:            error("socket");
+Binary file cliente-tcp-con-select-setsockopt.out matches
+servidor-tcp-con-select-setsockopt.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock'
+servidor-tcp-con-select-setsockopt.c: * por el socket <F3> por STDIN.
+servidor-tcp-con-select-setsockopt.c: * Si se reciben paquetes por el socket, 
+servidor-tcp-con-select-setsockopt.c: * los env<ED>a por el socket (write(2)).
+servidor-tcp-con-select-setsockopt.c:#include<sys/socket.h>
+servidor-tcp-con-select-setsockopt.c:   if((sock = socket(PF_INET, SOCK_STREAM,0))<0)
+servidor-tcp-con-select-setsockopt.c:           error("socket");
+servidor-tcp-select-setsockopt-para-2-clientes.c: * Abre un socket TCP (ORIENTADO A CONEXI<D3>N) 'sock_oyente'
+servidor-tcp-select-setsockopt-para-2-clientes.c:#include<sys/socket.h>
+servidor-tcp-select-setsockopt-para-2-clientes.c:       if((sock_oyente = socket(PF_INET, SOCK_STREAM,0) ) < 0)
+servidor-tcp-select-setsockopt-para-2-clientes.c:               error("socket_oyente");
+Binary file servidor-tcp-select-setsockopt-para-2-clientes.out matches
+"
+Se puede dar un rango de confirmaciones (commits) a git log donde la primera no es necesariamente un ancestro de la segunda,
+por ejemplo si las puntas de las ramas "master" y "experimental" divergieron desde una confirmación común
+algún tiempo atrás entonces
+
+$ git log master..experimental
+La salida mostrará todas las confirmaciones hechas en la rama "experimental" pero sin mostrar las que están en la rama "master"
+"
+commit 7ec88b23da29b0b69645bb03aa5c6c02a20d55d3 (experimental)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Sat Dec 12 21:42:40 2020 -0300
+
+    En rama experimental tercer commit por modificación del archivo Leame.txt
+"
+Se puede ejecutar al revés
+$ git log experimental..master
+La salida mostrará todas las confirmaciones hechas en la rama "master" pero sin mostrar las que están en la rama "experimental"
+En mi proyecto no muestra nada
+
+El comando git log tiene una debilidad: debe presentar confirmaciones en una lista. 
+Cuando la historia tiene líneas de desarrollo que divergieron y luego se fusionaron, 
+el orden en el que git log presenta esas confirmaciones no tiene sentido
+
+Próximos Pasos
+Este tutorial debería ser suficiente para llevar a cabo el control de revisiones distribuidos para tus proyectos.
+Sin embargo para comprender completamente en profundidad el poder de Git necesita comprender dos ideas simples 
+en las cuales está basado:
+
+· La base de datos de objetos es un sistema bastante elegante usado para almacenar la historia de los archivos del proyecto, directorios y confirmaciones.
+
+· El archivo de índice es un caché del estado de un árbol de directorios, que se usa para crear confirmaciones, 
+  verificar directorios de trabajo y contener los diversos árboles involucrados en una fusión 
+
+La segunda parte de este tutorial explica la base de datos de objetos, el archivo de índice y algunas otras probabilidades 
+y finalidades que necesitará para aprovechar al máximo Git. Puede encontrarlo en gittutorial-2 (7)
+
+Si no desea continuar con eso de inmediato, algunas otras digresiones que pueden ser interesantes en este momento son
+
+· git-format-patch (1), git-am (1): Estos convierten series de confirmaciones de git en parches enviados por correo electrónico y viceversa, 
+  útiles para proyectos como el kernel de Linux que dependen en gran medida de los parches
+
+· git-bisect (1): cuando hay una regresión en su proyecto, una forma de rastrear el error es buscar en el historial 
+  para encontrar la confirmación exacta que es la causante. Git bisect puede ayudarlo a realizar una búsqueda binaria 
+  para esa confirmación. Es lo suficientemente inteligente como para realizar una búsqueda casi óptima incluso 
+  en el caso de un historial no lineal complejo con muchas ramas fusionadas.
+
+· gitworkflows (7): ofrece una descripción general de los flujos de trabajo recomendados.
+
+· giteveryday (7): Git diario con 20 comandos más o menos.
+
+· gitcvs-migration (7): Git para usuarios de CVS
+
+VEA TAMBIÉN
+       gittutorial-2(7), gitcvs-migration(7), gitcore-tutorial(7), gitglossary(7), git-help(1), gitworkflows(7), giteveryday(7), The Git User’s Manual[1]
+
+GIT
+       Part of the git(1) suite
+
+NOTES
+        1. The Git User’s Manual
+           file:///usr/share/doc/git/html/user-manual.html
+
+Git 2.17.1                                                                                  04/20/2020
+----
+Intento subir el proyecto "proyecto-chat" a GITHUB
+
+1º Se Crea en GITHUB el repositorio "proyecto-chat"
+
+2º Al repositorio "proyecto-chat" le creo una rama-branch con nombre "master"
+
+3º En el equipo local intento ejecutar un push desde el directorio del "proyecto-chat"
+ehv80@LILANDRA:~/Documentos/Git/proyecto-chat$ git push https://github.com/ehv80/proyecto-chat master
+Username for 'https://github.com': ehv80
+Password for 'https://ehv80@github.com': 
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/ehv80/proyecto-chat/'
+
+---
+28/01/2021
+Según la búsqueda en Google "como subir un proyecto local a github"
+y Los Procedimientos encontrados en la WEB
+URL: https://gist.github.com/cgonzalezdai/cc33db72a6fe5178637aabb562eae35c
+Contenido útil
+"
+Como subir un proyecto local a github.
+desde la web de github
+Creamos un nuevo repositorio en https://github.com. 
+Le damos nombre, descripción, seleccionamos si va a ser un proyecto publico 
+o privado si es el caso, y dejamos el check de crear README sin marcar. 
+Le damos a crear repositorio y con esto ya tenemos el repositorio donde alojaremos nuestro proyecto.
+
+desde la terminal del equipo donde esta el proyecto que queremos subir a github
+Nos vamos a la carpeta del proyecto y ejecutamos estos comandos.
+
+git init
+
+git add .
+
+git commit -m "first commit"
+
+git remote add origin https://github.com/NOMBRE_USUARIO/NOMBRE_PROYECTO.git
+
+git push -u origin master
+
+"
+Se intenta ejecutar 
+
+1º ehv80@LILANDRA:~/Documentos/Git/proyecto-chat$ git remote add origin https://github.com/ehv80/proyecto-chat.git
+
+2º  ehv80@LILANDRA:~/Documentos/Git/proyecto-chat$ git push origin master
+Username for 'https://github.com': ehv80
+Password for 'https://ehv80@github.com': 
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/ehv80/proyecto-chat.git/'
+
+Se intenta usando la contraseña y no se puede
+Se intenta usando el código de 6 dígitos generado por la app Google Authenticator como contraseña y tampoco se puede
+---
+En la Página Web de GITHUB -> Settings -> Developers Settings
+Se genera un 
+
+Token de Acceso Personal 
+Personal Access Token
+
+Ver Nota en Google Keep Notes
+---
+Se intenta hacer lo mismo 
+tanto con e token de acceso personal como con el hash SHA-1 de 40 caracteres
+pero no se puede acceder
+---
