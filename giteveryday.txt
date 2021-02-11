@@ -1,0 +1,891 @@
+# Resumen de la página de manual giteveryday 
+# Fecha de Creación: 08 / 02 / 2021
+# Autor: Ezequiel Hernán Villanueva
+#
+
+NOMBRE
+
+giteveryday - Un conjunto mínimo de comandos útiles para el uso de git diariamente
+
+SINOPSIS
+
+Uso cotidiano de GIT con 20 comandos mas o menos
+
+DESCRIPCIÓN
+
+Los usuarios de Git se pueden agrupar en cuatro categorías con el propósito de describir aquí 
+un pequeño conjunto de comandos útiles para el uso cotidiano de Git.
+
+· Los comandos para un Desarrollador Individual (Independiente) son esenciales 
+  para cualquier persona que realice una confirmación, incluso para alguien que trabaja solo
+
+· Si trabaja con otras personas, también necesitará los comandos enumerados 
+  en la sección Desarrollador individual (Participante de un Grupo de Desarrolladores)
+
+· Las personas que desempeñan el Papel de Integrador deben aprender 
+  algunos comandos más, además de los anteriores.
+
+· Los comandos de Administración de Repositorios son para los 
+  Administradores del Sistema que son Responsables del Cuidado y la Alimentación de los Repositorios de Git.
+
+DESARROLLADOR INDIVIDUAL (INDEPENDIENTE)
+
+Un Desarrollador Individual Independiente no intercambia parches con otras personas 
+y trabaja solo en un solo repositorio, usando los siguientes comandos.
+
+· git-init(1) para crear un nuevo repositorio.
+
+· git-log(1) para ver qué sucedió.
+
+· git-checkout(1) y git-branch(1) para cambiar de rama.
+
+· git-add(1) para administrar el archivo de índice.
+
+· git-diff(1) y git-status(1) para ver lo que estás haciendo mientras tanto.
+
+· git-commit(1) para avanzar una confirmación más en la rama actual.
+
+· git-reset(1) y git-checkout(1) (con parámetros de nombre de ruta) para deshacer los cambios.
+
+· git-merge(1) para fusionar entre ramas locales.
+
+· git-rebase(1) para mantener las ramas temáticas.
+
+· git-tag(1) para marcar un punto conocido.
+
+Ejemplos
+
+Utilizamos un archivo comprimido "tarball" como punto de partida para un nuevo repositorio.
+Lo descargamos desde la siguiente URL:
+https://sourceforge.net/projects/frotz/files/frotz/
+https://sourceforge.net/projects/frotz/files/frotz/frotz-2.44.tar.gz/download
+
+$ tar zxvf frotz-2.44.tar.gz
+frotz-2.44/
+frotz-2.44/TODO
+frotz-2.44/INSTALL
+frotz-2.44/BUGS
+frotz-2.44/DOSBUILD.txt
+frotz-2.44/README
+frotz-2.44/doc/
+frotz-2.44/doc/frotz.conf-big
+frotz-2.44/doc/frotz.conf-small
+frotz-2.44/doc/dfrotz.6
+frotz-2.44/doc/frotz.6
+frotz-2.44/PORTING
+frotz-2.44/ChangeLog
+frotz-2.44/AUTHORS
+frotz-2.44/build.bat
+frotz-2.44/DUMB
+frotz-2.44/PACKAGING
+frotz-2.44/Makefile.tc
+frotz-2.44/README.1st
+frotz-2.44/COPYING
+frotz-2.44/SPEECH
+frotz-2.44/src/
+frotz-2.44/src/dumb/
+frotz-2.44/src/dumb/dumb_output.c
+frotz-2.44/src/dumb/dumb_init.c
+frotz-2.44/src/dumb/dumb_frotz.h
+frotz-2.44/src/dumb/dumb_pic.c
+frotz-2.44/src/dumb/dumb_input.c
+frotz-2.44/src/misc/
+frotz-2.44/src/misc/findsound.sh
+frotz-2.44/src/sdl/
+frotz-2.44/src/sdl/sf_font3.c
+frotz-2.44/src/sdl/sf_resample.c
+frotz-2.44/src/sdl/sf_sound.c
+frotz-2.44/src/sdl/sf_resource.c
+frotz-2.44/src/sdl/sf_sig.c
+frotz-2.44/src/sdl/sf_ftype.c
+frotz-2.44/src/sdl/sf_fonts.c
+frotz-2.44/src/sdl/sf_osfdlg.c
+frotz-2.44/src/sdl/sf_deffont.c
+frotz-2.44/src/sdl/samplerate.h
+frotz-2.44/src/sdl/sf_frotz.h
+frotz-2.44/src/sdl/sf_aiffwav.c
+frotz-2.44/src/sdl/sf_util.c
+frotz-2.44/src/sdl/sf_msg_en.c
+frotz-2.44/src/sdl/sf_video.c
+frotz-2.44/src/sdl/sf_images.c
+frotz-2.44/src/dos/
+frotz-2.44/src/dos/fontdata.h
+frotz-2.44/src/dos/bcblorb.h
+frotz-2.44/src/dos/bcsample.c
+frotz-2.44/src/dos/blorb.h
+frotz-2.44/src/dos/blorblow.h
+frotz-2.44/src/dos/bcmouse.c
+frotz-2.44/src/dos/bctext.c
+frotz-2.44/src/dos/bcfrotz.h
+frotz-2.44/src/dos/bcblorb.c
+frotz-2.44/src/dos/bcscreen.c
+frotz-2.44/src/dos/bcpic.c
+frotz-2.44/src/dos/bcinput.c
+frotz-2.44/src/dos/bcinit.c
+frotz-2.44/src/blorb/
+frotz-2.44/src/blorb/blorb.h
+frotz-2.44/src/blorb/blorblow.h
+frotz-2.44/src/blorb/blorblib.c
+frotz-2.44/src/curses/
+frotz-2.44/src/curses/ux_audio_none.c
+frotz-2.44/src/curses/ux_file.c
+frotz-2.44/src/curses/ux_blorb.h
+frotz-2.44/src/curses/ux_text.c
+frotz-2.44/src/curses/ux_screen.c
+frotz-2.44/src/curses/ux_init.c
+frotz-2.44/src/curses/getopt.h
+frotz-2.44/src/curses/ux_pic.c
+frotz-2.44/src/curses/ux_frotz.h
+frotz-2.44/src/curses/ux_setup.h
+frotz-2.44/src/curses/ux_blorb.c
+frotz-2.44/src/curses/ux_audio_oss.c
+frotz-2.44/src/curses/ux_input.c
+frotz-2.44/src/common/
+frotz-2.44/src/common/process.c
+frotz-2.44/src/common/getopt.c
+frotz-2.44/src/common/math.c
+frotz-2.44/src/common/frotz.h
+frotz-2.44/src/common/files.c
+frotz-2.44/src/common/screen.c
+frotz-2.44/src/common/quetzal.c
+frotz-2.44/src/common/buffer.c
+frotz-2.44/src/common/setup.h
+frotz-2.44/src/common/main.c
+frotz-2.44/src/common/redirect.c
+frotz-2.44/src/common/stream.c
+frotz-2.44/src/common/object.c
+frotz-2.44/src/common/hotkey.c
+frotz-2.44/src/common/variable.c
+frotz-2.44/src/common/err.c
+frotz-2.44/src/common/fastmem.c
+frotz-2.44/src/common/sound.c
+frotz-2.44/src/common/random.c
+frotz-2.44/src/common/text.c
+frotz-2.44/src/common/table.c
+frotz-2.44/src/common/input.c
+frotz-2.44/src/test/
+frotz-2.44/src/test/strictz.z5
+frotz-2.44/src/test/random.z5
+frotz-2.44/src/test/crashme.inf
+frotz-2.44/src/test/unicode.inf
+frotz-2.44/src/test/README
+frotz-2.44/src/test/crashme.z5
+frotz-2.44/src/test/random.inf
+frotz-2.44/src/test/unicode.z5
+frotz-2.44/src/test/gntests.inf
+frotz-2.44/src/test/gntests.z5
+frotz-2.44/src/test/etude/
+frotz-2.44/src/test/etude/etude.z5
+frotz-2.44/src/test/etude/README
+frotz-2.44/src/test/etude/etude.inf
+frotz-2.44/src/test/etude/exittext.inc
+frotz-2.44/src/test/etude/division.inc
+frotz-2.44/src/test/etude/color.inc
+frotz-2.44/src/test/etude/timedstr.inc
+frotz-2.44/src/test/etude/header.inc
+frotz-2.44/src/test/etude/styles.inc
+frotz-2.44/src/test/etude/givenin.inc
+frotz-2.44/src/test/etude/accentin.inc
+frotz-2.44/src/test/etude/accents.inc
+frotz-2.44/src/test/etude/undo.inc
+frotz-2.44/src/test/etude/timedch.inc
+frotz-2.44/src/test/etude/Makefile
+frotz-2.44/src/test/strictz.inf
+frotz-2.44/Makefile
+frotz-2.44/HOW_TO_PLAY
+
+$ cd frotz-2.44/
+
+$ git init
+Inicializado repositorio Git vacío en /home/ehv80/Documentos/Git/frotz-2.44/.git/
+
+$ git add . 
+(1)
+
+$ git commit -m "1er Confirmación - Rama master - Se importa el arbol de directorios del código fuente de frotz."
+[master (commit-raíz) 93f5789] 1er Confirmación - Rama master - Se importa el arbol de directorios del código fuente de frotz.
+ 120 files changed, 37486 insertions(+)
+ create mode 100644 AUTHORS
+ create mode 100644 BUGS
+ create mode 100644 COPYING
+ create mode 100644 ChangeLog
+ create mode 100644 DOSBUILD.txt
+ create mode 100644 DUMB
+ create mode 100644 HOW_TO_PLAY
+ create mode 100644 INSTALL
+ create mode 100644 Makefile
+ create mode 100644 Makefile.tc
+ create mode 100644 PACKAGING
+ create mode 100644 PORTING
+ create mode 100644 README
+ create mode 100644 README.1st
+ create mode 100644 SPEECH
+ create mode 100644 TODO
+ create mode 100644 build.bat
+ create mode 100644 doc/dfrotz.6
+ create mode 100644 doc/frotz.6
+ create mode 100644 doc/frotz.conf-big
+ create mode 100644 doc/frotz.conf-small
+ create mode 100644 src/blorb/blorb.h
+ create mode 100644 src/blorb/blorblib.c
+ create mode 100644 src/blorb/blorblow.h
+ create mode 100644 src/common/buffer.c
+ create mode 100644 src/common/err.c
+ create mode 100644 src/common/fastmem.c
+ create mode 100644 src/common/files.c
+ create mode 100644 src/common/frotz.h
+ create mode 100644 src/common/getopt.c
+ create mode 100644 src/common/hotkey.c
+ create mode 100644 src/common/input.c
+ create mode 100644 src/common/main.c
+ create mode 100644 src/common/math.c
+ create mode 100644 src/common/object.c
+ create mode 100644 src/common/process.c
+ create mode 100644 src/common/quetzal.c
+ create mode 100644 src/common/random.c
+ create mode 100644 src/common/redirect.c
+ create mode 100644 src/common/screen.c
+ create mode 100644 src/common/setup.h
+ create mode 100644 src/common/sound.c
+ create mode 100644 src/common/stream.c
+ create mode 100644 src/common/table.c
+ create mode 100644 src/common/text.c
+ create mode 100644 src/common/variable.c
+ create mode 100644 src/curses/getopt.h
+ create mode 100644 src/curses/ux_audio_none.c
+ create mode 100644 src/curses/ux_audio_oss.c
+ create mode 100644 src/curses/ux_blorb.c
+ create mode 100644 src/curses/ux_blorb.h
+ create mode 100644 src/curses/ux_file.c
+ create mode 100644 src/curses/ux_frotz.h
+ create mode 100644 src/curses/ux_init.c
+ create mode 100644 src/curses/ux_input.c
+ create mode 100644 src/curses/ux_pic.c
+ create mode 100644 src/curses/ux_screen.c
+ create mode 100644 src/curses/ux_setup.h
+ create mode 100644 src/curses/ux_text.c
+ create mode 100644 src/dos/bcblorb.c
+ create mode 100644 src/dos/bcblorb.h
+ create mode 100644 src/dos/bcfrotz.h
+ create mode 100644 src/dos/bcinit.c
+ create mode 100644 src/dos/bcinput.c
+ create mode 100644 src/dos/bcmouse.c
+ create mode 100644 src/dos/bcpic.c
+ create mode 100644 src/dos/bcsample.c
+ create mode 100644 src/dos/bcscreen.c
+ create mode 100644 src/dos/bctext.c
+ create mode 100644 src/dos/blorb.h
+ create mode 100644 src/dos/blorblow.h
+ create mode 100644 src/dos/fontdata.h
+ create mode 100644 src/dumb/dumb_frotz.h
+ create mode 100644 src/dumb/dumb_init.c
+ create mode 100644 src/dumb/dumb_input.c
+ create mode 100644 src/dumb/dumb_output.c
+ create mode 100644 src/dumb/dumb_pic.c
+ create mode 100755 src/misc/findsound.sh
+ create mode 100644 src/sdl/samplerate.h
+ create mode 100644 src/sdl/sf_aiffwav.c
+ create mode 100644 src/sdl/sf_deffont.c
+ create mode 100644 src/sdl/sf_font3.c
+ create mode 100644 src/sdl/sf_fonts.c
+ create mode 100644 src/sdl/sf_frotz.h
+ create mode 100644 src/sdl/sf_ftype.c
+ create mode 100644 src/sdl/sf_images.c
+ create mode 100644 src/sdl/sf_msg_en.c
+ create mode 100644 src/sdl/sf_osfdlg.c
+ create mode 100644 src/sdl/sf_resample.c
+ create mode 100644 src/sdl/sf_resource.c
+ create mode 100644 src/sdl/sf_sig.c
+ create mode 100644 src/sdl/sf_sound.c
+ create mode 100644 src/sdl/sf_util.c
+ create mode 100644 src/sdl/sf_video.c
+ create mode 100644 src/test/README
+ create mode 100644 src/test/crashme.inf
+ create mode 100644 src/test/crashme.z5
+ create mode 100644 src/test/etude/Makefile
+ create mode 100644 src/test/etude/README
+ create mode 100644 src/test/etude/accentin.inc
+ create mode 100644 src/test/etude/accents.inc
+ create mode 100644 src/test/etude/color.inc
+ create mode 100644 src/test/etude/division.inc
+ create mode 100644 src/test/etude/etude.inf
+ create mode 100644 src/test/etude/etude.z5
+ create mode 100644 src/test/etude/exittext.inc
+ create mode 100644 src/test/etude/givenin.inc
+ create mode 100644 src/test/etude/header.inc
+ create mode 100644 src/test/etude/styles.inc
+ create mode 100644 src/test/etude/timedch.inc
+ create mode 100644 src/test/etude/timedstr.inc
+ create mode 100644 src/test/etude/undo.inc
+ create mode 100644 src/test/gntests.inf
+ create mode 100644 src/test/gntests.z5
+ create mode 100644 src/test/random.inf
+ create mode 100644 src/test/random.z5
+ create mode 100644 src/test/strictz.inf
+ create mode 100644 src/test/strictz.z5
+ create mode 100644 src/test/unicode.inf
+ create mode 100644 src/test/unicode.z5
+
+$ git tag v2.44 
+(2)
+
+Notas de Aclaración:
+
+(1) . Agrega todo lo que hay en el directorio de trabajo actual 
+      al área de preparación (stage) de la base de datos de objetos de GIT
+
+(2) . Crea una etiqueta breve sin anotaciones 
+      indicando la versión del código fuente de frotz, en este caso 2.44
+
+Crea una nueva Rama temática y desarrolla/programa
+
+$ git checkout -b alsa-audio
+(1)
+
+$ edit/compile/test
+
+En mi sistema además ejecuto:
+
+$ ./configure
+"
+bash: ./configure: No existe el archivo o el directorio
+"
+
+$ make
+"
+gcc -O2  -o src/common/buffer.o -c src/common/buffer.c
+src/common/buffer.c:21:10: fatal error: string.h: No existe el archivo o el directorio
+ #include <string.h>
+          ^~~~~~~~~~
+compilation terminated.
+Makefile:217: fallo en las instrucciones para el objetivo 'src/common/buffer.o'
+make: *** [src/common/buffer.o] Error 1
+"
+
+$ git checkout -- src/curses/ux_audio_oss.c
+(2)
+
+$ git add src/curses/ux_audio_alsa.c
+(3)
+
+$ edit/compile/test
+
+En mi sistema otra vez ejecuto:
+Aclaro que no tengo la intención de depurar este error, no hay tiempo. ;-)
+
+$ make
+gcc -O2  -o src/common/buffer.o -c src/common/buffer.c
+src/common/buffer.c:21:10: fatal error: string.h: No existe el archivo o el directorio
+ #include <string.h>
+          ^~~~~~~~~~
+compilation terminated.
+Makefile:217: fallo en las instrucciones para el objetivo 'src/common/buffer.o'
+make: *** [src/common/buffer.o] Error 1
+
+$ git diff HEAD
+(4)
+
+$ git commit -a -s
+En la rama alsa-audio
+nada para hacer commit, el árbol de trabajo está limpio
+(5)
+
+$ edit/compile/test
+
+En mi sistema no voy a hacer más nada.
+
+$ git diff HEAD^ 
+(6)
+fatal: argumento ambiguo 'HEAD^': revisión desconocida o ruta fuera del árbol de trabajo.
+Use '--' para separar las rutas de las revisiones, de esta manera:
+'git <comando> [<revisión>...] -- [<archivo>...]'
+
+$ git commit -a --amend 
+(7)
+
+$ git checkout master
+Cambiado a rama 'master'
+(8)
+
+$ git merge alsa-audio
+fatal: rehusando fusionar historias no relacionadas
+(9)
+
+$ git log --since='3 days ago'
+commit 93f57899960f1531a96a1611934c81e9f945312c (HEAD -> master, tag: v2.44)
+Author: ehv80 <ezequiel.villanueva@gmail.com>
+Date:   Mon Feb 8 19:15:19 2021 -0300
+
+    1er Confirmación - Rama master - Se importa el arbol de directorios del código fuente de frotz.
+(10)
+
+$ git log v2.44.. src/curses/
+(11)
+
+
+Notas de Aclaración:
+
+(1)  . Crea una nueva Rama temática llamada "alsa-audio" y se posiciona el apuntador HEAD en esa rama
+(2)  . Revierte los cambios fallidos en src/curses/ux_audio_oss.c
+(3)  . Debe informar a Git si agregó un nuevo archivo; 
+      la eliminación y modificación serán detectadas si haces git commit -a más tarde.  
+(4)  . Para ver qué cambios ha confirmado
+(5)  . Confirma todo, como lo has testeado, con tu aprobación
+(6)  . Mira todos tus cambios, incluida la confirmación anterior.
+(7)  . Modifique la confirmación anterior, agregando todos sus nuevos cambios, usando su mensaje original. 
+(8)  . Cambia a la rama (master) principal
+(9)  . Intenta Fusionar la otra rama llamada "alsa-audio" con la rama en la que está ubicado ahora: principal (master)
+(10) . Revisar los registros de confirmación; otras formas para limitar la salida se pueden combinar 
+       e incluir -10 (para mostrar hasta 10 confirmaciones), --until = 2005-12-10, etc. 
+(11) . Ver solo los cambios que le sucedieron a todo lo que está en el directorio src/curses , desde la etiqueta (tag) v2.44.
+
+DESARROLLADOR INDIVIDUAL (PARTICIPANTE DE UN EQUIPO DE PROGRAMADORES)
+
+Un desarrollador que trabaja como participante en un proyecto grupal necesita aprender a comunicarse con otros 
+y utilizar estos comandos además de los que necesita un desarrollador independiente.
+
+· git-clone(1) desde el Repositorio Online Remoto en GITHUB u otro servidor (upstream) 
+  para preparar una copia en un repositorio en el equipo local.
+
+· git-pull(1) y git-fetch(1) desde "origin" para mantenerse actualizado 
+  con el Repositorio Online Remoto en GITHUB u otro servidor (upstream).
+
+· git-push(1) al repositorio compartido, si adopta el flujo de trabajo de un repositorio compartido estilo CVS.
+
+· git-format-patch(1) para preparar el envío de correo electrónico, 
+  si adopta el flujo de trabajo del foro público al estilo del Núcleo (kernel) de Linux.
+
+· git-send-email(1) para enviar su envío de correo electrónico 
+  sin que su MUA (Mail User Agent, Cliente de Correo Electrónico) lo corrompa.
+
+· git-request-pull(1) para crear un resumen de cambios 
+  para que su Repositorio Online Remoto en GITHUB u otro servidor (upstream) los extraiga.
+
+Ejemplos:
+Clona el Repositorio Online Remoto en GITHUB u otro servidor (upstream) y trabaja en él. 
+Guarda los cambios en el Repositorio Online Remoto en GITHUB u otro servidor (upstream).
+
+$ git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ my2.6
+Clonando en 'my2.6'...
+fatal: remote error: access denied or repository not exported: /pub/scm/.../torvalds/linux-2.6
+
+$ git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git my2.6
+Clonando en 'my2.6'...
+remote: Enumerating objects: 181, done.
+remote: Counting objects: 100% (181/181), done.
+remote: Compressing objects: 100% (128/128), done.
+^Ccibiendo objetos:   4% (315785/7886275), 153.90 MiB | 1.18 MiB/s
+
+(Cancelo con [Ctrl]-[C] para no descargar toda esa gran cantidad exorbitante de archivos)
+
+$ cd my2.6
+
+$ git checkout -b mine master 
+(1)
+
+$ edit/compile/test; git commit -a -s 
+(2)
+
+$ git format-patch master 
+(3)
+
+$ git send-email --to="person <email@example.com>" 00*.patch 
+(4)
+
+$ git checkout master 
+(5)
+
+$ git pull 
+(6)
+
+$ git log -p ORIG_HEAD.. arch/i386 include/asm-i386 
+(7)
+
+$ git ls-remote --heads http://git.kernel.org/.../jgarzik/libata-dev.git 
+(8)
+
+$ git pull git://git.kernel.org/pub/.../jgarzik/libata-dev.git ALL 
+(9)
+
+$ git reset --hard ORIG_HEAD 
+(10)
+
+$ git gc 
+(11)
+
+Notas de Aclaración:
+
+(1)  . Crea (-b) una nueva Rama llamada "mine" desde la Rama (master) y se ubica en ella el apuntador HEAD
+(2)  . Repita estos comandos tanto como sea necesario
+(3)  . Extraer los parches desde su rama actual "mine", en relación con la rama principal "master"
+(4)  . Y les envía por correo electrónico al destinatario
+(5)  . Vuelve a la rama principal (master), listo para ver las novedades 
+(6)  . git pull recupera (todo lo que hay) desde el origen (origin) de forma predeterminada y se fusiona con la rama actual
+(7)  . Inmediatamente después de recuperar, mire los cambios realizados en el
+       Repositorio Online Remoto en GITHUB u otro servidor (upstream)      
+       desde la última vez que verificamos, solo en el área que nos interesa. 
+(8)  . Chequea los nombres de las ramas en un repositorio externo (si no son conocidos)
+(9)  . Recupera desde una rama específica TODO desde un repositorio específico y lo fusiona.
+(10) . Revierte lo que se recuperó (pull) (desde el apuntador ORIG_HEAD)
+(11) . Recolecta la basura los objetos sobrantes de la recuperación (pull) revertida.
+
+
+
+Sube (Push) en otro Repositorio
+
+
+satellite$ git clone mothership:frotz frotz 
+(1) 
+
+satellite$ cd frotz
+
+satellite$ git config --get-regexp '^(remote|branch)\.' 
+               remote.origin.url mothership:frotz
+               remote.origin.fetch refs/heads/*:refs/remotes/origin/*
+               branch.master.remote origin
+               branch.master.merge refs/heads/master
+(2)
+
+satellite$ git config remote.origin.push \
+                          +refs/heads/*:refs/remotes/satellite/* 
+(3)
+
+satellite$ edit/compile/test/commit
+
+satellite$ git push origin 
+(4)
+
+mothership$ cd frotz
+
+mothership$ git checkout master
+
+mothership$ git merge satellite/master 
+(5)
+
+
+
+Notas de Aclaración:
+
+(1)  . EL equipo (host) llamado "mothership" tiene un repositorio llamado "frotz" en su directorio personal; 
+       Lo clona desde éste para iniciar un nuevo repositorio idéntico en el equipo (host) llamado "satellite".
+
+(2)  . clone establece estas variables de configuración de forma predeterminada. 
+       Organiza git pull para buscar (fetch) y almacenar las ramas (branches) del equipo llamado "mothership"  
+       hacia el equipo local llamado "satellite" haciendo un seguimiento de las ramas remotas remotes/origin/* .
+
+(3)  . Configura  git push  para enviar todas las ramas (branches) locales (del equipo "satellite")
+       a sus ramas (branches) remotas correspondientes del equipo "mothership".
+
+(4)  .  git push origin   guardará todo nuestro trabajo que está en las ramas de seguimiento remoto 
+        en el directorio remotes/satellite/*  en el equipo "mothership". 
+        Puede utilizar esto como un método de Copia de Seguridad. 
+        Igualmente, puede pretender que el equipo "mothership" es "fetched" "buscado" desde su equipo ("satellite") 
+        (útil cuando el acceso es unilateral).
+
+
+(5)  .  Estando en el equipo llamado "mothership", fusiona el trabajo realizado en la rama principal "master"
+        con el trabajo que está en el equipo remoto "satellite" en la rama principal "master".
+
+
+Bifurcación (Branch off) desde una etiqueta de una versión específica
+
+$ git checkout -b private2.6.14 v2.6.14 
+(1)
+
+$ edit/compile/test; git commit -a
+
+$ git checkout master
+
+$ git cherry-pick v2.6.14..private2.6.14 
+(2)
+
+
+
+Notas de Aclaración:
+
+(1)  . Crea una rama llamada private2.6.14 basada en una etiqueta (tag) conocida (pero algo retrasada). 
+
+(2)  . Reenvía todos los cambios en la rama private2.6.14 hacia la rama principal "master" sin una "fusión" formal. O a mano
+
+git format-patch -k -m --stdout v2.6.14..private2.6.14 | git am -3 -k
+
+Un mecanismo alternativo de envío de participantes está utilizando 
+  git request-pull  los mecanismos de solicitud de extracción 
+o extracción de git (por ejemplo, como se usa en GitHub (www.github.com) 
+para notificar a su   Repositorio Online Remoto en GITHUB u otro servidor (upstream)   de su contribución.
+
+
+
+INTEGRADOR
+
+Una persona bastante central que actúa como Integrador en un Proyecto Grupal 
+recibe los cambios realizados por otros, los revisa e integra y publica el resultado para que los otros lo utilicen, 
+usando estos comandos además de los que necesitan los DESARROLLADORES INDIVIDUALES (PARTICIPANTES DE UN EQUIPO DE PROGRAMADORES) (Participant) (Participante)
+
+Esta sección también puede ser utilizada por aquellos que responden a  git request-pull  o  pull-request  en GitHub (www.github.com) 
+para integrar el trabajo de otros en su historial. 
+Un "lugarteniente" "lieutenants" de una Sub-Área de un repositorio actuará 
+como DESARROLLADORES INDIVIDUALES (PARTICIPANTES DE UN EQUIPO DE PROGRAMADORES) (Participant) (Participante) y como Integrador.
+
+· git-am(1) para aplicar los parches recibidos por correo electrónico desde sus colaboradores.
+
+· git-pull(1) para fusionarse con sus "lugartenientes" "lieutenants" de confianza.
+
+· git-format-patch(1) para preparar y enviar alternativas sugeridas a los colaboradores.
+
+· git-revert(1) para deshacer confirmaciones fallidas.
+
+· git-push(1) para publicar (subir al repositorio remoto) las últimas modificaciones (vanguardia).
+
+Ejemplos
+
+Un Día típico de un INTEGRADOR de GIT
+
+$ git status 
+(1)
+
+$ git branch --no-merged master 
+(2)
+
+$ mailx 
+& s 2 3 4 5 ./+to-apply
+& s 7 8 ./+hold-linus
+& q
+(3)
+
+$ git checkout -b topic/one master
+
+$ git am -3 -i -s ./+to-apply 
+(4)
+
+$ compile/test
+
+$ git checkout -b hold/linus && git am -3 -i -s ./+hold-linus 
+(5)
+
+$ git checkout topic/one && git rebase master 
+(6)
+
+$ git checkout pu && git reset --hard next 
+(7)
+
+$ git merge topic/one topic/two && git merge hold/linus
+(8)
+
+$ git checkout maint
+
+$ git cherry-pick master~4 
+(9)
+
+$ compile/test
+
+$ git tag -s -m "GIT 0.99.9x" v0.99.9x 
+(10)
+
+$ git fetch ko && for branch in master maint next pu 
+(11)
+
+    do
+        git show-branch ko/$branch $branch 
+    done
+(12)
+
+$ git push --follow-tags ko 
+(13)
+
+
+
+Notas de Aclaración:
+
+(1)  . Vea lo que estaba haciendo, si es que estaba haciendo algo. 
+
+(2)  . Ver qué ramas aún no han sido fusionadas con la rama principal (master).
+       Lo mismo para cualquier otra rama (branch) de integración, 
+       por ejemplo "maint", "next" y "pu" ("potential updates" "actualizaciones potenciales").
+
+(3)  . Lea los correos electrónicos, guarde los que sean aplicables y guarde otros que no estén listos 
+       (hay otras aplicaciones clientes de correo electrónico disponibles).
+
+(Yo Agrego:  Crea una nueva rama (branch) principal "master" a partir del <remoto>/<rama> <topic>/<one> )
+(            y ubica el apuntador HEAD en esta rama (checkout)                                               )
+(4)  . Aplíquelos, (aplique la serie de parches desde la casilla de correo electrónico) de forma interactiva, con sus firmas.
+ 
+(5)  . Crea una Rama (branch) (<remoto>/<rama> <hold>/<linux>) (desde equipo "hold" rama "linus") 
+(Yo Agrego:  y ubica el apuntador HEAD en esta rama (checkout)                                               )
+       según sea necesario y aplique, (aplique la serie de parches desde la casilla de correo electrónico) nuevamente con sus firmas.
+
+(6)  . Rebasa (Reaplica confirmaciones encima de otra punta base) la rama interna (en <remoto>/<rama> <topic>/<one>) 
+       que no ha sido fusionada con la rama (branch) "principal" "master" 
+       o expuesta como parte de una rama (branch) estable. 
+
+(7)  . Reinicia (la rama branch) "pu" ("potential updates" "actualizaciones potenciales") cada vez desde la (rama branch) siguiente. 
+
+(8)  . y agrupar ramas de temas que aún se cocinan (se codifican) (desde <remoto>/<rama> <topic>/<one> <topic>/<two> <hold>/<linux>)
+
+(9)  . Backport (Puerta Trasera) una solución crítica. 
+(Yo agrego:  git cherry-pick  aplicar los cambios introducidos por algunas confirmaciones existentes)
+
+(10) . Crea una "etiqueta" "tag" firmada.
+
+(11) . Asegúrese de que la rama "principal" "master" no se haya rebobinado accidentalmente más allá de lo ya expulsado.
+
+(12) . En la salida de  git show-branch,  la rama "principal" "master" debería tener todo lo que tiene 
+       el <remoto>/<rama> <ko>/<master>, y la rama "next" debería tener todo lo que tiene <ko>/<next>, etc. 
+(Yo agrego:  git show-branch  Muestra las ramas (branches) y sus confirmaciones (commits) )
+
+(13) . "Push" (Sube contenido de ramas locales al equipo remoto "ko")  
+       las últimas modificaciones (vanguardia), junto con nuevas "etiquetas" "tags" que apuntan a la historia ya "subida".
+
+
+
+En este ejemplo, la abreviatura "ko" apunta a un Repositorio de un mantenedor de Git en el sitio kernel.org, 
+y se ve así en el sistema de archivos:
+
+(in .git/config)
+[remote "ko"]
+         url = kernel.org:/pub/scm/git/git.git
+         fetch = refs/heads/*:refs/remotes/ko/*
+         push = refs/heads/master
+         push = refs/heads/next
+         push = +refs/heads/pu
+         push = refs/heads/maint
+
+(Yo agrego:  git fetch  Descargar objetos y referencias de otro repositorio                )
+(            git push   Actualizar referencias remotas junto con objetos asociados "Subir" )
+
+
+
+ADMINISTRACIÓN DE REPOSITORIOS
+
+Un administrador de repositorio utiliza las siguientes herramientas para configurar y mantener 
+el acceso al repositorio por parte de los desarrolladores.
+
+·  git-daemon(1) para permitir la descarga anónima desde un repositorio.
+
+·  git-shell(1) se puede utilizar como un shell de inicio de sesión restringido para los usuarios de un repositorio central compartido.
+
+·  git-http-backend(1) proporciona una implementación del lado del servidor de Git-over-HTTP ("Smart http")
+   que permite tanto los servicios de recuperación ("fetch" "descarga")  como los de envío ("push" "subida"). 
+
+·  gitweb(1) proporciona una interfaz web para los repositorios de Git, que se puede configurar utilizando el script git-instaweb(1).
+
+update hook howto[1] tiene un buen ejemplo de cómo administrar un repositorio central compartido.
+
+Además, hay una serie de otras soluciones de revisión, navegación y alojamiento,  ampliamente desplegadas, tales como:
+
+        · Gitolite, revisión de código gerrit, cgit y otros.
+
+Ejemplos
+
+Asumimos que tenemos lo siguiente en /etc/services
+
+$ grep 9418 /etc/services
+git             9418/tcp                # Git Version Control System
+
+Ejecuta  git-daemon  para servir el directorio  /pub/scm  a través de  inetd.
+
+ git     stream  tcp     nowait  nobody \
+                 /usr/bin/git-daemon git-daemon --inetd --export-all /pub/scm
+
+La línea de configuración actual debería estar en una sola línea.
+
+Ejecuta  git-daemon  para servir el directorio  /pub/scm  a través de  xinetd.
+
+   $ cat /etc/xinetd.d/git-daemon
+               # default: off
+               # description: The Git server offers access to Git repositories
+               service git
+               {
+                       disable = no
+                       type            = UNLISTED
+                       port            = 9418
+                       socket_type     = stream
+                       wait            = no
+                       user            = nobody
+                       server          = /usr/bin/git-daemon
+                       server_args     = --inetd --export-all --base-path=/pub/scm
+                       log_on_failure  += USERID
+               }
+
+Verifique su configuración y documentación de  xinetd(8),  esta es de un Sistema Operativo Fedora. 
+En Otros S.O. pueden ser diferentes.
+
+Otorga acceso  push/pull (subida/recuperación e integración con otro repositorio o rama local) 
+solo a los desarrolladores que usan git-over-ssh
+p.ej. aquellos que usan: $ git push/pull ssh://host.xz/pub/scm/project
+
+               $ grep git /etc/passwd 
+               (1)
+               alice:x:1000:1000::/home/alice:/usr/bin/git-shell
+               bob:x:1001:1001::/home/bob:/usr/bin/git-shell
+               cindy:x:1002:1002::/home/cindy:/usr/bin/git-shell
+               david:x:1003:1003::/home/david:/usr/bin/git-shell
+               $ grep git /etc/shells 
+               /usr/bin/git-shell
+               (2)
+
+Notas de Aclaración:
+
+(1)  . El shell de inicio de sesión está configurado en  /usr/bin/git-shell, 
+       que no permite nada más que  git push  y  git pull. Los usuarios requieren acceso SSH a la máquina.
+(2)  . En muchas distribuciones  /etc/shells  se necesita listar lo que se usa como shell de inicio de sesión
+
+
+Repositorio compartido estilo CVS.
+
+               $ grep git /etc/group 
+               git:x:9418:alice,bob,cindy,david
+               (1)
+
+               $ cd /home/devo.git
+
+               $ ls -l
+                 lrwxrwxrwx   1 david git    17 Dec  4 22:40 HEAD -> refs/heads/master
+                 drwxrwsr-x   2 david git  4096 Dec  4 22:40 branches
+                 -rw-rw-r--   1 david git    84 Dec  4 22:40 config
+                 -rw-rw-r--   1 david git    58 Dec  4 22:40 description
+                 drwxrwsr-x   2 david git  4096 Dec  4 22:40 hooks
+                 -rw-rw-r--   1 david git 37504 Dec  4 22:40 index
+                 drwxrwsr-x   2 david git  4096 Dec  4 22:40 info
+                 drwxrwsr-x   4 david git  4096 Dec  4 22:40 objects
+                 drwxrwsr-x   4 david git  4096 Nov  7 14:58 refs
+                 drwxrwsr-x   2 david git  4096 Dec  4 22:40 remotes
+               (2)
+
+               $ ls -l hooks/update
+                 -r-xr-xr-x   1 david git  3536 Dec  4 22:40 update
+               (3)
+
+               $ cat info/allowed-users
+               refs/heads/master       alice\|cindy
+               refs/heads/doc-update   bob
+               refs/tags/v[0-9]*       david
+               (4)
+
+
+
+Notas de Aclaración:
+
+(1)  . Se coloca dentro del grupo de usuario "git" a todos los Desarrolladores (en el archivo /etc/group)
+
+(2)  . y hace que todos los usuarios miembros del grupo pueda escribir en el repositorio compartido. 
+(Yo Agrego:  Muestra con  ls -l los permisos del sistema de archivo                                     )
+
+(3)  . Usa el ejemplo de "guión" "hook" (script) de actualización escrito por el usuario david (no Carl)
+       que se encuentra en el Directorio  /home/devo.git/hooks/update  
+       (según la documentación que está en)  Documentation/howto/  para las políticas de control ramas.
+
+(4)  . Los usuarios  alice  y  cindy  pueden  "push" "subir" a la rama principal "master", 
+       solamente el usuario  "bob"  puede "push" "subir"  a la rama "doc-update". 
+       El usuario  "david"  es el Administrador de Versiones 
+       y es la única persona que puede crear y enviar "etiquetas" "tags" de versión.
+
+GIT
+       Parte de la "suite" "conjunto de comandos" de  git(1) 
+
+NOTES
+        1. update hook howto (documentación acerca de cómo ejecutar el guión script de actualización)
+           file:///usr/share/doc/git/html/howto/update-hook-example.html
+
+Git 2.17.1                                                                                  04/20/2020 
+
